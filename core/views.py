@@ -91,4 +91,18 @@ def getUserByName(request,name):
         serializer = UserSerializer2(user)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def getOrdersById(request,id):
+    try:
+        orders = Order.objects.get(customer_id=id);
+    except Order.DoesNotExist as e:
+        return JsonResponse({'error':str(e)})
+    if request.method == 'GET':
+        serializer = OrderSerializer2(orders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# class OrdersListByUserIdAPIView(generics.ListCreateAPIView):
+#     queryset = Order.objects.get(customer_id=id)
+#     serializer_class = OrderSerializer2
 

@@ -8,5 +8,7 @@ urlpatterns = [
     path('reviews/', reviews_list),
     path('sproducts/', ProductLAPIView.as_view()),
     path('orders/', OrdersListAPIView.as_view()),
-    path('users/',UserViewSet.as_view())
+    path('users/',UserViewSet.as_view()),
+    path('users/<str:name>/',getUserByName),
+    path('orders/<int:id>/',getOrdersById)
 ]
