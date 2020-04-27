@@ -10,5 +10,6 @@ urlpatterns = [
     path('orders/', OrdersListAPIView.as_view()),
     path('users/',UserViewSet.as_view()),
     path('users/<str:name>/',getUserByName),
-    path('orders/<int:id>/',getOrdersById)
+    path('orders/<int:id>/',getOrdersById),
+    path('orders/<int:id>/<int:order_id>/',getOrderUserByIdOrder)
 ]

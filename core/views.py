@@ -94,12 +94,29 @@ def getUserByName(request,name):
 @api_view(['GET'])
 def getOrdersById(request,id):
     try:
-        orders = Order.objects.filter(customer_id=id);
+        orders = Order.objects.filter(customer_id=id)
     except Order.DoesNotExist as e:
         return JsonResponse({'error':str(e)})
     if request.method == 'GET':
         serializer = OrderSerializer2(orders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET', 'DELETE'])
+def getOrderUserByIdOrder(request,id,order_id):
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist as e:
+        return JsonResponse({'error': str(e)})
+
+    if request.method == 'GET':
+        serializer = OrderSerializer2(order)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'DELETE':
+        order.delete()
+        return Response({'deleted': True})
+
+
 
 
 # class OrdersListByUserIdAPIView(generics.ListCreateAPIView):
