@@ -94,7 +94,7 @@ def getUserByName(request,name):
 @api_view(['GET'])
 def getOrdersById(request,id):
     try:
-        orders = Order.objects.get(customer_id=id);
+        orders = Order.objects.filter(customer_id=id);
     except Order.DoesNotExist as e:
         return JsonResponse({'error':str(e)})
     if request.method == 'GET':

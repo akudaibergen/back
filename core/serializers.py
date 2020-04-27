@@ -38,16 +38,6 @@ class ReviewSerializer2(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OrderSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    customer = serializers.IntegerField()
-    product = ProductSerializer(many=True)
-    data_created = serializers.DateTimeField(read_only=True)
-    description = serializers.CharField()
-    image = serializers.CharField()
-    price = serializers.IntegerField()
-
-
 class OrderSerializer2(serializers.ModelSerializer):
     #
     class Meta:
